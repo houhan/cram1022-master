@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "463612255542",
+    "firebase_url": "https://cramfcm.firebaseio.com",
+    "project_id": "cramfcm",
+    "storage_bucket": "cramfcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463612255542:android:8b3ebe9b2e518feb",
+        "android_client_info": {
+          "package_name": "com.example.user.cram1001"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463612255542-2454fi8bob73lofi6fldqkcmu47qb8gb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.cram1001",
+            "certificate_hash": "153AE6B792AD784C0CAFBC3B4178DB1B7B05BF6E"
+          }
+        },
+        {
+          "client_id": "463612255542-oth7b980du1kf7ghmtiaorsvipkhonhj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYdn-2gweKl5pyRrbudV3o0qx1gsBVF64"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463612255542-oth7b980du1kf7ghmtiaorsvipkhonhj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

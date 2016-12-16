@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.user.cram1001">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <permission
+        android:name="com.example.user.cram1001.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.user.cram1001.permission.C2D_MESSAGE" />
+    <!-- 通知震動 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- 藍芽 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- 地圖 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logobig"
+        android:label="智慧安心班"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- FCM背景接收訊息的服務 -->
+        <service android:name=".Fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".Fcm.MyInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".FirstActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".CreateMemberActivity" />
+        <activity android:name=".AddBillboardActivity" />
+        <activity
+            android:name=".BillboardActivity"
+            android:parentActivityName=".HomeActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.user.cram1001.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".QkActivity"
+            android:parentActivityName=".HomeActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.user.cram1001.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".Billboard_teacherActivity"
+            android:parentActivityName=".Home_teacherActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.user.cram1001.HomeActivity" />
+        </activity>
+        <activity android:name=".CheckActivity" />
+        <activity android:name=".attendanceActivity" />
+        <activity android:name=".BeaconActivity" />
+        <activity android:name=".CheckParentsActivity" />
+        <activity android:name=".FcmActivity" />
+        <activity android:name=".Home_teacherActivity" />
+        <activity android:name=".PublicActivity" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBIP4OckcUBUSAwd-2KSIOu29RSFH5Zcz4" />
+
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".Qk_teacherActivity" />
+        <activity android:name=".NotifigohomeActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".DatePickerFragment2" />
+        <activity android:name=".ArrivetimeActivity"></activity>
+    </application>
+
+</manifest>
