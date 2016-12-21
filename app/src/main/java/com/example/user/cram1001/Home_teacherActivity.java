@@ -37,9 +37,9 @@ public class Home_teacherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(Home_teacherActivity.this, CheckActivity.class);
-                intent.putExtra("UNAME", UNAME);
-                intent.putExtra("UClass", UClass);
-                intent.putExtra("UUSER", UUSER);
+//                intent.putExtra("UNAME", UNAME);
+//                intent.putExtra("UClass", UClass);
+//                intent.putExtra("UUSER", UUSER);
                 startActivity(intent);
             }
         });

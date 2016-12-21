@@ -35,7 +35,10 @@ public class MyAdapterCheck extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return contentChecks.get(position);
+        if(contentChecks!=null && contentChecks.size()>position && position>=0) {
+            return contentChecks.get(position);
+        }
+        return null;
     }
 
     @Override

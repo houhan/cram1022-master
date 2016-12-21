@@ -5,18 +5,12 @@
     android:background="@drawable/background"
     android:orientation="vertical">
 
-    <!--<Button-->
-        <!--android:id="@+id/btn"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Press Here"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/textView23"-->
-        <!--android:text="56456456" />-->
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Press Here"
+        android:layout_alignParentBottom="true"/>
 
     <ListView
         android:layout_width="match_parent"

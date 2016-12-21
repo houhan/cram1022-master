@@ -46,36 +46,6 @@ public class CreateMemberActivity extends AppCompatActivity {
 
     }
 
-    /*
-    // ----------------- 測試GCM
-    public String getGcmRegId() {
-        return PreferenceManager.getDefaultSharedPreferences(this).getString("registration_id", null);
-    }
-    public void registration() {
-        GCMRegistrationTask task = new GCMRegistrationTask();
-        task.execute();
-    }
-    private class GCMRegistrationTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            Log.d(TAG, "Registering");
-            GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-            try {
-                return gcm.register(SENDER_ID);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                RegID = result;
-            }
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////
-    */
     private View.OnClickListener CreateMemberListener = new View.OnClickListener() {
         private String AddRegid,AddStatus;
         public void onClick(View v) {
@@ -93,7 +63,7 @@ public class CreateMemberActivity extends AppCompatActivity {
                 String strstatus = URLEncoder.encode(AddStatus.toString(), "UTF-8");
                 mProgressDialog.show();
 
-                String url = "https://cramschoollogin.herokuapp.com/api/insert?user=" + strAccount + "&password=" + strPassword +  "&name=" + strName + "&minor=" + strminor +"&room=" + strclass + "&regid=" + strregid + "&status=" + strstatus;
+                String url = "https://cramschoollogin.herokuapp.com/api/insert?user=" + strAccount + "&password=" + strPassword +  "&name=" + strName + "&minor=" + strminor +"&room=" + strclass + "&regid=" + strregid + "&sstatus=" + strstatus;
                 StringRequest request = new StringRequest(Request.Method.GET, url, mOnAddSuccessListener, mOnErrorListener);
                 NetworkManager.getInstance(CreateMemberActivity.this).request(null, request);
             } catch (UnsupportedEncodingException e) {

@@ -33,6 +33,8 @@ import com.example.user.cram1001.volleymgr.NetworkManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -70,6 +72,8 @@ public class CheckActivity extends AppCompatActivity {
         }
         mBluetoothAdapter.startLeScan(mLeScanCallback); //開始接收藍芽資訊
 
+        Button updateButton = (Button) findViewById(R.id.update);
+        updateButton.setOnClickListener(updateListener);
     }
 
     private Response.ErrorListener mErrorListener = new Response.ErrorListener() {
@@ -95,7 +99,9 @@ public class CheckActivity extends AppCompatActivity {
                     RRoom = obj.getString("room");
                     ContentCheck contentC = new ContentCheck(NName, RRoom, "");
                     contentC.regid = obj.getString("regid");
+                    contentC.minor = obj.getString("minor");
                     contentCheck.add(contentC);
+
                 }
                 myAdapter.notifyDataSetChanged();
             } catch (JSONException e1) {
@@ -112,7 +118,7 @@ public class CheckActivity extends AppCompatActivity {
                     .setPositiveButton("是", new DialogInterface.OnClickListener() {
                         private String SStatus;
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(DialogInterface dialog, int which ) {
                             // String strmsg = URLEncoder.encode(MSG);
                             String url = "https://cramschoollogin.herokuapp.com/api/sendfcm?to=" + contentC.regid;
                             StringRequest request = new StringRequest(Request.Method.GET, url, mOnAddSuccessListener, mOnErrorListener);
@@ -120,7 +126,7 @@ public class CheckActivity extends AppCompatActivity {
 
                             SStatus = "小孩已安全到達安親班囉！";
                             String strstatus = URLEncoder.encode(SStatus);
-                            String url2 = "https://cramschoollogin.herokuapp.com/api/insertstatus?regid=" + contentC.regid + "&sstatus=" + strstatus ;
+                            String url2 = "https://cramschoollogin.herokuapp.com/api/insertstatus?minor=" + contentC.minor + "&sstatus=" + strstatus ;
                             StringRequest request2 = new StringRequest(Request.Method.GET, url2, mOnAddSuccessListener, mOnErrorListener);
                             NetworkManager.getInstance(CheckActivity.this).request(null, request2);
                         }
@@ -225,8 +231,10 @@ public class CheckActivity extends AppCompatActivity {
                         break;
                     case 10:
                         ContentCheck chk5 = (ContentCheck) myAdapter.getItem(5);
-                        chk5.textcheck = "ARRIVE";
-                        myAdapter.notifyDataSetChanged();
+                        if (chk5 != null) {
+                            chk5.textcheck = "ARRIVE";
+                            myAdapter.notifyDataSetChanged();
+                        }
                         break;
                     default:
                         break;
@@ -234,6 +242,29 @@ public class CheckActivity extends AppCompatActivity {
             }
 
 
+        }
+    };
+
+    private View.OnClickListener updateListener = new View.OnClickListener() {
+        public void onClick(View v) {
+                String url = "https://cramschoollogin.herokuapp.com/api/insertstatus2";
+                StringRequest request = new StringRequest(Request.Method.GET, url, UpdateSuccessListener, UpdateErrorListener);
+                NetworkManager.getInstance(CheckActivity.this).request(null, request);
+        }
+    };
+    protected Response.Listener<String> UpdateSuccessListener = new Response.Listener<String>() {
+
+        @Override
+        public void onResponse(String response) {
+            Toast.makeText(CheckActivity.this, "資料已更改", Toast.LENGTH_LONG).show();
+        }
+    };
+
+    protected Response.ErrorListener UpdateErrorListener = new Response.ErrorListener() {
+
+        @Override
+        public void onErrorResponse(VolleyError err) {
+            Toast.makeText(CheckActivity.this, "Err " + err.toString(), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -252,6 +283,8 @@ public class CheckActivity extends AppCompatActivity {
             Toast.makeText(CheckActivity.this, "Err " + err.toString(), Toast.LENGTH_LONG).show();
         }
     };
+
+
     private Handler mHandler = new Handler() {
     };
     private Handler mHandler1 = new Handler() {

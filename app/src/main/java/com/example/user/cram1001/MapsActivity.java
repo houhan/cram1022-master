@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,6 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationListener {
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyBIP4OckcUBUSAwd-2KSIOu29RSFH5Zcz4";
+    private static final String TAG = "tag";
     private DirectionFinderListener listener;
     private String origin;
     private String destination;
@@ -84,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest mLocationRequest;
     private TextView DDistance, DTime;
     private String UNAME;
+    LatLng hcmus = new LatLng(24.988103, 121.549335);
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -115,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        etDestination = (EditText) findViewById(R.id.etDestination);
 //        sendRequest();
         btnFindPath = (Button) findViewById(R.id.btnFindPath);
-         etDestination = (EditText) findViewById(R.id.etDestination);
+        etDestination = (EditText) findViewById(R.id.etDestination);
         btnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,7 +282,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             message = UNAME + " 的家長大約於 " + DDtime + " 後抵達安親班";
 
-            String regid = "deDAsnlfFhE:APA91bFiAsVVE5Fu7KFDAudAQCVKsOFg3dsYQ-D1Ytp7aOcaFwuryrQjcfKj8-jWKVNZe4gtDNS9Q7oMjiFYC872hih04DhCRX6IR-GG_Y6gg9Tj-kwqUOASgN_UJsLWvFj8gjYEJCl5";
+            String regid = "e6DDiz6SwMc:APA91bFU26pqHVrufDWG8BpaDk--93Jjnlhw8yMJ8PeCVjntyV-YXUa7-bDHZGLGSSQnf_otEhIfKpmk-vAbSo2Y4OZT_Efv3Oog4X4H-ZMtHnZSD8IvQ5mKet9oBDPGjPAnT6qiu0Yy";
             String strmsg = URLEncoder.encode(message);
 
             String url = "https://cramschoollogin.herokuapp.com/api/sendfcmarrive?to=" + regid + "&message=" + strmsg;
@@ -293,13 +297,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         public void onResponse(String response){
 
             Toast.makeText(MapsActivity.this, "已通知老師", Toast.LENGTH_LONG).show();
-            MapsActivity.this.finish();
+//            MapsActivity.this.finish();
         }
     };
     protected Response.ErrorListener mOnListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError err) {
             Toast.makeText(MapsActivity.this, "通知失敗 " + err.toString(), Toast.LENGTH_LONG).show();
+            sent = false;
         }
     };
 
@@ -317,8 +322,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        LatLng hcmus = new LatLng(24.974631, 121.544504);
-        mMap.addMarker(new MarkerOptions().position(hcmus).title("空中美語兒童美語 新店北新分校"));
+
+        mMap.addMarker(new MarkerOptions().position(hcmus).title("考試院"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus, 18));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -358,9 +363,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
+        Log.d(TAG, "Log" + location.getLatitude() + "," + location.getLongitude());
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        sendfcm(latLng);
 
         myLocation = new double[2];
         myLocation[0] = location.getLatitude();
@@ -379,7 +386,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //stop location updates
         if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
     }
 
@@ -533,11 +540,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-//    public void sendfcm(){
-//        String NowLatLng = "你現在的經緯度位置";
-//        String DestinationLatLng = "24.974555, 121.544781;
-//        if(Spherical.Util.computeDistanceBetween(NowLatLng, DestinationLatLng) < 500){
-//            //do somthing u want
-//        }
-//    }
+    private boolean sent = false;
+    public void sendfcm(LatLng latLng){
+
+        if(SphericalUtil.computeDistanceBetween(latLng, hcmus) < 500 && sent == false){
+
+            String message = UNAME + " 的家長即將抵達安親班囉！";
+
+            String regid = "e6DDiz6SwMc:APA91bFU26pqHVrufDWG8BpaDk--93Jjnlhw8yMJ8PeCVjntyV-YXUa7-bDHZGLGSSQnf_otEhIfKpmk-vAbSo2Y4OZT_Efv3Oog4X4H-ZMtHnZSD8IvQ5mKet9oBDPGjPAnT6qiu0Yy";
+            String strmsg = URLEncoder.encode(message);
+
+            String url = "https://cramschoollogin.herokuapp.com/api/sendfcmarrive?to=" + regid + "&message=" + strmsg;
+            StringRequest request = new StringRequest(Request.Method.GET, url, mOnSuccessListener, mOnListener);
+            NetworkManager.getInstance(MapsActivity.this).request(null, request);
+
+            sent = true;
+        }
+    }
 }

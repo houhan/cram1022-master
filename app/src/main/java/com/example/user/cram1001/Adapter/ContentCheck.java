@@ -9,6 +9,7 @@ public class ContentCheck {
     public String room ="";
     public String textcheck ="";
     public String regid = "";
+    public String minor = "";
 
     public ContentCheck(String nname, String nroom , String narrive) {
         this.name = nname;
