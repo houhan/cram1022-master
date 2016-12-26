@@ -44,13 +44,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".FirstActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".CreateMemberActivity" />
         <activity android:name=".AddBillboardActivity" />
@@ -82,8 +75,6 @@
                 android:value="com.example.user.cram1001.HomeActivity" />
         </activity>
         <activity android:name=".CheckActivity" />
-        <activity android:name=".attendanceActivity" />
-        <activity android:name=".BeaconActivity" />
         <activity android:name=".CheckParentsActivity" />
         <activity android:name=".FcmActivity" />
         <activity android:name=".Home_teacherActivity" />
@@ -108,8 +99,7 @@
         <activity android:name=".Qk_teacherActivity" />
         <activity android:name=".NotifigohomeActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".DatePickerFragment2" />
-        <activity android:name=".ArrivetimeActivity"></activity>
+        <!--<activity android:name=".DatePickerFragment2" />-->
     </application>
 
 </manifest>

@@ -46,7 +46,7 @@ public class AddBillboardActivity extends AppCompatActivity {
 
             try {
 
-                //螢幕擷取三項資料後上傳DB
+                //擷取三項資料後上傳DB
                 String strDate = URLEncoder.encode(DateInput.getEditableText().toString(), "UTF-8");
                 String strTitle = URLEncoder.encode(TitleInput.getEditableText().toString(), "UTF-8");
                 String strContent = URLEncoder.encode(ContentInput.getEditableText().toString(), "UTF-8");
@@ -72,9 +72,7 @@ public class AddBillboardActivity extends AppCompatActivity {
 
             //結束頁面
             AddBillboardActivity.this.finish();
-//            Intent intent = new Intent();
-//            intent.setClass(AddBillboardActivity.this, Billboard_teacherActivity.class);
-//            AddBillboardActivity.this.startActivity(intent);
+
         }
     };
 

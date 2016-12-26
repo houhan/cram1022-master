@@ -35,11 +35,6 @@ public class CreateMemberActivity extends AppCompatActivity {
 
         Button CreateButton = (Button) findViewById(R.id.test);
         CreateButton.setOnClickListener(CreateMemberListener);
-/*
-        String currentRegId = getGcmRegId();
-        if (TextUtils.isEmpty(currentRegId)) {
-            registration();
-        }*/
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Wait...");
@@ -53,7 +48,7 @@ public class CreateMemberActivity extends AppCompatActivity {
             try {
                 AddRegid = "0";
                 AddStatus = "孩子尚未抵達安親班唷";
-                //螢幕擷取三項資料後上傳DB
+                //擷取資料後上傳DB
                 String strAccount = URLEncoder.encode(AccountInput.getEditableText().toString(), "UTF-8");
                 String strPassword = URLEncoder.encode(PasswordInput.getEditableText().toString(), "UTF-8");
                 String strName = URLEncoder.encode(NameInput.getEditableText().toString(), "UTF-8");

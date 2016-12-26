@@ -35,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //抓取上一頁資料
         Intent intent = this.getIntent();
 
         UNAME = intent.getStringExtra("UNAME");
@@ -108,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
+//上傳token id
         String token = GCMUtils.getSavedToken(this);
         if (TextUtils.isEmpty(token)) {
             AsyncTask<Void, Void, Void> getTokenTask = new AsyncTask<Void, Void, Void>() {

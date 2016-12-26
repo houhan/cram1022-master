@@ -62,7 +62,7 @@ public class Billboard_teacherActivity extends AppCompatActivity {
 
 
     }
-
+//長按觸發事件
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         @Override
@@ -84,7 +84,7 @@ public class Billboard_teacherActivity extends AppCompatActivity {
         }
     };
 
-
+//顯示資料庫
     private void queryTodoList() {
         mProgressDialog.show();
         StringRequest request = new StringRequest(Request.Method.GET, "https://cramschoollogin.herokuapp.com/api/querybillboard", mOnQuerySuccessListener, mOnErrorListener);

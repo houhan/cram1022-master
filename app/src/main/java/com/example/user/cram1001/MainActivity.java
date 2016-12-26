@@ -58,17 +58,6 @@ public class MainActivity extends AppCompatActivity {
         String strPassword = PasswordInput.getText().toString();
         String strTeacher = PasswordInput.getText().toString();
 
-//        Button buttontest = (Button) findViewById(R.id.create);//取得按鈕
-//        // buttontest.setOnClickListener(TestListener);
-//        buttontest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this, TestActivity.class);
-//                MainActivity.this.startActivity(intent);
-//
-//            }
-//        });//將這個Listener綑綁在這個Button
 
         Button LogInButton = (Button) findViewById(R.id.button);
 
@@ -141,17 +130,8 @@ public class MainActivity extends AppCompatActivity {
         });
         LogInButton.setOnClickListener(LogInListener);
 
-//        buttontest.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//
-//            }
-//        });
-
-        //  buttontest.setOnClickListener(TestListener);
     }
+    //給帳號比對
     private View.OnClickListener LogInListener = new View.OnClickListener() {
         public void onClick(View v) {
             try {
@@ -260,12 +240,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("UNAME", UNAME);
                 intent.putExtra("UClass", UClass);
                 intent.putExtra("UStatus", UStatus);
-//            Intent intent2 = new Intent(MainActivity.this, HomeActivity.class);
-//            intent2.setClass(MainActivity.this, HomeActivity.class);
-//            intent2.putExtra("UNAME", UNAME);
-//            Intent intent3 = new Intent(MainActivity.this, HomeActivity.class);
-//            intent3.setClass(MainActivity.this, HomeActivity.class);
-//            intent3.putExtra("UClass", UClass);
 
                 startActivity(intent);
             }
@@ -276,41 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-//
-//    public static String md5(String str)
-//    {
-//        MessageDigest md5 = null;
-//        try
-//        {
-//            md5 = MessageDigest.getInstance("MD5");
-//        }catch(Exception e)
-//        {
-//            e.printStackTrace();
-//            return "";
-//        }
-//
-//        char[] charArray = str.toCharArray();
-//        byte[] byteArray = new byte[charArray.length];
-//
-//        for(int i = 0; i < charArray.length; i++)
-//        {
-//            byteArray[i] = (byte)charArray[i];
-//        }
-//        byte[] md5Bytes = md5.digest(byteArray);
-//
-//        StringBuffer hexValue = new StringBuffer();
-//        for( int i = 0; i < md5Bytes.length; i++)
-//        {
-//            int val = ((int)md5Bytes[i])&0xff;
-//            if(val < 16)
-//            {
-//                hexValue.append("0");
-//            }
-//            hexValue.append(Integer.toHexString(val));
-//        }
-//        return hexValue.toString();
-//    }
-
 
     protected ErrorListener LoginErrorListener = new ErrorListener() {
 

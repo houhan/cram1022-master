@@ -31,7 +31,7 @@ public class QkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qk);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//回前頁
 
-
+//抓取上一頁給的資料
         Intent intent = this.getIntent();
 
         UNAME = intent.getStringExtra("UNAME");
@@ -39,9 +39,7 @@ public class QkActivity extends AppCompatActivity {
 
         USERname = (TextView) findViewById(R.id.name22);
         USERname.setText(UNAME);
-        //bData.putString("date", qk_time.getText().toString())
-        //DateInput = (Button) findViewById(R.id.qk_time);
-        //NameInput = (EditText) findViewById(R.id.qk_name);
+
         ResonInput = (EditText) findViewById(R.id.qk_reson);
         PSInput = (EditText) findViewById(R.id.qk_PS);
        // DateInput = (EditText) findViewById(R.id.editqktime);
@@ -59,7 +57,7 @@ public class QkActivity extends AppCompatActivity {
                 Button DateButton = (Button) findViewById(R.id.qk_time);
                 DateButton .getText().toString();
 
-                //螢幕擷取三項資料後上傳DB
+                //擷取資料後上傳DB
                 {
                     String strDate = URLEncoder.encode(DateButton.getText().toString(), "UTF-8");
                     String strName = URLEncoder.encode(UNAME.toString(), "UTF-8");
@@ -77,7 +75,7 @@ public class QkActivity extends AppCompatActivity {
         }
     };
 
-
+//時間挑選器
     public void showDatePickerDialog(View v)
     {
         DialogFragment newFragment = new DatePickerFragment();

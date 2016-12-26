@@ -14,9 +14,8 @@ public class Home_teacherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_teacher);
-
+//抓取上一頁資料
         Intent intent = this.getIntent();
-
         UClass = intent.getStringExtra("UClass");
         UNAME = intent.getStringExtra("UNAME");
         UUSER = intent.getStringExtra("UUSER");

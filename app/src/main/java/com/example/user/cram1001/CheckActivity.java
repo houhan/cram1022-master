@@ -63,6 +63,7 @@ public class CheckActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(NotifiListener);
         //mHandler1.postDelayed(mDetectRunnable1, 30000);
 
+        //藍芽
         BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE); //宣告藍芽資訊接收管理
         mBluetoothAdapter = bluetoothManager.getAdapter(); //將接收的資訊放入堆疊
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {  //堆疊是空的 or 堆疊disabled
@@ -110,6 +111,7 @@ public class CheckActivity extends AppCompatActivity {
         }
     };
 
+    //長按觸發事件
     private AdapterView.OnItemLongClickListener NotifiListener = new AdapterView.OnItemLongClickListener(){
         public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
             final ContentCheck contentC = (ContentCheck) parent.getAdapter().getItem(position);
@@ -119,11 +121,11 @@ public class CheckActivity extends AppCompatActivity {
                         private String SStatus;
                         @Override
                         public void onClick(DialogInterface dialog, int which ) {
-                            // String strmsg = URLEncoder.encode(MSG);
+                            //發通知
                             String url = "https://cramschoollogin.herokuapp.com/api/sendfcm?to=" + contentC.regid;
                             StringRequest request = new StringRequest(Request.Method.GET, url, mOnAddSuccessListener, mOnErrorListener);
                             NetworkManager.getInstance(CheckActivity.this).request(null, request);
-
+                            //改狀態
                             SStatus = "小孩已安全到達安親班囉！";
                             String strstatus = URLEncoder.encode(SStatus);
                             String url2 = "https://cramschoollogin.herokuapp.com/api/insertstatus?minor=" + contentC.minor + "&sstatus=" + strstatus ;
@@ -144,6 +146,7 @@ public class CheckActivity extends AppCompatActivity {
         }
 
     };
+    //BEACON
     private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {   //接收到藍芽資訊然後針對接收到的資料進行解析
         @Override
         public void onLeScan(final BluetoothDevice device, final int rssi,
@@ -199,10 +202,6 @@ public class CheckActivity extends AppCompatActivity {
 
                 Log.d("BLE","distance:"+calculateAccuracy(txPower,rssi));
                 mHandler.postDelayed(mDetectRunnable, 1000);
-
-                //mCheckBox.setChecked(false);
-                //mCheckBox1.setChecked(false);
-
                 switch (minor) {
                     case 8:
                         ContentCheck chk = (ContentCheck) myAdapter.getItem(0);
@@ -302,7 +301,7 @@ public class CheckActivity extends AppCompatActivity {
     };
 
 
-
+//BEACON
     static final char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     private static String bytesToHex(byte[] bytes) {  //位元轉換

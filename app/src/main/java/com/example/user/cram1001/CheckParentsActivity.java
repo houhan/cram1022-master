@@ -66,7 +66,7 @@ public class CheckParentsActivity extends Activity{
         StringRequest request = new StringRequest(Request.Method.GET,url, QuerySuccessListener, QueryErrorListener);
         NetworkManager.getInstance(CheckParentsActivity.this).request(null, request);
     }
-
+//更新狀態
     private SwipeRefreshLayout.OnRefreshListener onSwipeToRefresh = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {

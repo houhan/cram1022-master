@@ -26,7 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Scanner;
-
+//測試用
 public class FcmActivity extends AppCompatActivity {
 
             @Override

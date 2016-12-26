@@ -41,14 +41,9 @@ public class Qk_teacherActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listqk);
         myAdapter = new MyAdapterQk(this, contentQk);
         listView.setAdapter(myAdapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
-        querymyAdapter();
 
+        querymyAdapter();
+//資料庫刪除
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -76,7 +71,7 @@ public class Qk_teacherActivity extends AppCompatActivity {
             }
         });
     }
-
+//顯示資料庫資料
     private void querymyAdapter(){
         StringRequest request = new StringRequest(Request.Method.GET, "https://cramschoollogin.herokuapp.com/api/queryqk", mResponseListener, mErrorListener);
         NetworkManager.getInstance(this).request(null, request);
@@ -106,35 +101,7 @@ public class Qk_teacherActivity extends AppCompatActivity {
             }
         }
     };
-//        @Override
-//        public void onResponse(String string) {
-//            Log.d("Response", string);
-//            // contentTest=new ArrayList<ContentTest>();
-//            try {
-//
-//                JSONArray ary = new JSONArray(string);
-//                StringBuilder ids = new StringBuilder();
-//                StringBuilder names = new StringBuilder();
-//                StringBuilder dates = new StringBuilder();
-//                StringBuilder titles = new StringBuilder();
-//                StringBuilder contents = new StringBuilder();
-//                for (int i = 0; i < ary.length(); i++) {
-//                    JSONObject json = ary.getJSONObject(i);
-//                    String id = json.getString("_id");
-//                    String name = json.getString("name");
-//                    String date = json.getString("date");
-//                    String reason = json.getString("reson");
-//                    String ps = json.getString("ps");
-//                    ContentQk contentQ = new ContentQk(name, date, reason, ps);
-//                    contentQk.add(contentQ);
-//                }
-//                myAdapter.notifyDataSetChanged();
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    };
+
 
     private Response.ErrorListener mErrorListener = new Response.ErrorListener() {
 
@@ -161,8 +128,7 @@ public class Qk_teacherActivity extends AppCompatActivity {
 
         @Override
         public void onResponse(String response) {
-//            Intent intent = new Intent(MainActivity.this, Home_teacherActivity.class);
-//            intent.setClass(MainActivity.this, Home_teacherActivity.class);
+
             Intent intent=new Intent (Qk_teacherActivity.this , Qk_teacherActivity.class);
             startActivity(intent);
             Qk_teacherActivity.this.finish();

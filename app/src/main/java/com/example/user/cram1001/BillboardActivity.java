@@ -93,19 +93,6 @@ public class BillboardActivity extends AppCompatActivity {
         }
     };
 
-/*
-    private Response.Listener<String> mOnDeleteSuccessListener = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-        }
-    };
-    private ErrorListener mOnErrorListener = new ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError err) {
-            Toast.makeText(BillboardActivity.this, err.toString(), Toast.LENGTH_LONG).show();
-        }
-    };*/
-
 
     //回前頁
     public void onBackPressed() {
